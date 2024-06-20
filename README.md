@@ -1,6 +1,7 @@
 ## comment
 
 `tips:` means something hot.
+`error:` means encounting some rust syntax error.
 
 
 ## reference
