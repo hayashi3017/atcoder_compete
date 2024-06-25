@@ -37,7 +37,7 @@ fn main() {
 
     for (a, b, c, d) in abcd {
         let p4 = sum[c - 1][d - 1];
-        let mut ans = 0;
+        let ans: usize;
         if a == 1 && b == 1 {
             ans = p4;
         } else if a == 1 {
