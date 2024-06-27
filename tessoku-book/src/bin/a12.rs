@@ -7,25 +7,29 @@ fn main() {
         a: [usize;n]
     }
 
-    // TODO: 未解決。途中。
     let l = 100_000_000usize;
-    let mut left = 0;
-    let mut right = l / 2;
-    while right - left > 1 {
-        let diff = right - left;
+    let mut left = 1;
+    let mut right = l;
+    while left < right {
+        let mid = (left + right) / 2;
         let mut sum = 0;
-        for i in 0..n {
-            sum += diff / a[i];
+        for v in &a {
+            sum += mid / v;
         }
 
         if sum < k {
-            left = right;
-            right *= 2;
-        } else if sum == k {
-            println!("{}", sum);
-            break;
-        } else if k < sum {
-            right /= 2;
+            left = mid + 1;
+        } else if k <= sum {
+            right = mid;
         }
+        // 下記ではNG.
+        // left = rightとなり left = midの無限ループとなる
+        // if sum <= k {
+        //     left = mid;
+        // } else if k < sum {
+        //     right = mid - 1;
+        // }
     }
+
+    println!("{}", left);
 }
