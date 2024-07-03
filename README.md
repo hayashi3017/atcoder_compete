@@ -13,3 +13,7 @@
 
 - [Rust petgraph で競技プログラミングのグラフ理論系頻出アルゴリズムを学ぶ #AtCoder - Qiita](https://qiita.com/hossie/items/ff0e9be89f22dea41aea)
 
+
+## pow
+
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=d4921fb028a42e4cbd587181519a38a0
