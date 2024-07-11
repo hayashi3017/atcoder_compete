@@ -1,49 +1,36 @@
 use proconio::input;
 
-// TODO: 途中・・消化しきれていない
 fn main() {
     input! {
         N: usize,
         W: usize,
-        wv: [(isize, isize);N]
+        wv: [(usize, usize);N]
     }
 
-    dbg!(&wv);
-    let mut dp = vec![vec![-1isize; W]; N];
+    // dbg!(&wv);
+    let mut dp = vec![vec![-1isize; W + 1]; N + 1];
     dp[0][0] = 0;
+    let mut w = vec![0usize; N];
+    let mut v = vec![0usize; N];
+    for (i, wv) in wv.iter().enumerate() {
+        w[i] = wv.0;
+        v[i] = wv.1;
+    }
 
-    for i in 1..N {
-        for j in 0..W {
-            let wv_s = &wv[0..i - 1];
-            // FIXME: 無駄がある、これだとナップザックに入る可能性のあるアイテムを毎回すべて確認している。dpはその時点での最大値を保持するので累積和のようにその時点のjを基準に1つだけ確認すればよい
-            let filtered = wv_s
-                .iter()
-                .filter(|(ws, _)| *ws as usize <= j)
-                .collect::<Vec<_>>();
-            // dbg!(&filtered);
-            // 重さj以下で何らかをナップサックへ入れることができるか
-            if filtered.len() != 0 {
-                if dp[i - 1][j] != -1
-                    || wv_s
-                        .iter()
-                        .any(|(ws, _vs)| dp[i - 1][j - *ws as usize] != -1)
-                {
-                    let max_v = wv_s
-                        .iter()
-                        .filter(|(ws, _)| *ws as usize == j)
-                        .map(|(_, vs)| vs)
-                        .max()
-                        .unwrap();
-                    dp[i][j] = dp[i - 1][j] + *max_v;
-                }
+    for i in 0..N {
+        for j in 0..=W {
+            let dpi = i + 1;
+            // 品物iまでの最大値を常に保持していくので、追加分の品物のみ比較して更新していけばよい
+            if w[i] <= j {
+                dp[dpi][j] = dp[dpi - 1][j].max(dp[dpi - 1][j - w[i]] + v[i] as isize);
             } else {
-                if dp[i - 1][j] != -1 {
-                    // 0以外ないかもしれない
-                    dp[i][j] = dp[i - 1][j];
-                }
+                dp[dpi][j] = dp[dpi - 1][j];
             }
         }
     }
 
-    dbg!(&dp);
+    // tips: 二次元配列の値のうち最大値を得るために一度フラットにする
+    let max = dp.iter().flat_map(|v| v.iter()).max().unwrap();
+    // dbg!(&dp);
+    println!("{}", max)
 }
