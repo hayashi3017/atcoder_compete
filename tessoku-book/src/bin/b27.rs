@@ -1,3 +1,11 @@
+use num::Integer;
+use proconio::input;
+
 fn main() {
-    todo!();
+    input! {
+        a: usize,
+        b: usize
+    }
+
+    println!("{}", a.lcm(&b));
 }
