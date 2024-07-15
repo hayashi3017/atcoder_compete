@@ -17,16 +17,3 @@
 ## pow
 
 https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=d4921fb028a42e4cbd587181519a38a0
-
-
-## add test case
-[cargo-compete/README-ja.md at master · qryxip/cargo-compete](https://github.com/qryxip/cargo-compete/blob/master/README-ja.md#cargo-compete-retrieve-testcases--cargo-compete-download)
-`cargo compete download --overwrite --full`で全テストケースをダウンロードするには、下記手順によりDropbox apiを利用するためのAccess tokenを準備しておく必要がある。
-
-1. Dropbox Appを作成する　＞　[test_for_atcoder - Dropbox](https://www.dropbox.com/developers/apps/info/e5jdwrkonjzxpam) 
-2. 作成したDropbox Appのコンソール上でAccess tokenを生成する　＞　`Generated access token`
-3. 生成したAccess tokenをcargo-competeが読み込めるように配置する　＞　`~/.local/share/cargo-compete/tokens/dropbox.json`
-
-`cargo compete download --overwrite --full`で全テストケースをダウンロードした場合、
-[Extend::SystemTestCases](https://github.com/qryxip/cargo-compete/blob/master/README-ja.md#extendsystemtestcases)となっており、
-実テストデータファイルは`~/.cache/cargo-compete/system-test-cases/atcoder.jp/contests/`配下に保存されている模様。
